@@ -6,8 +6,7 @@ author:
 abstract: Bzip2 response
 license: perl
 requires:
-  Catalyst: 5
-  Compress::Bzip2: 2
+  Compress::Bzip2: 0
 provides:
   Catalyst::Plugin::Compress::Bzip2:
     file: lib/Catalyst/Plugin/Compress/Bzip2.pm

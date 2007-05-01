@@ -4,7 +4,7 @@ use strict;
 
 use Compress::Bzip2 2.0 ();
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub finalize {
     my $c = shift;
@@ -21,7 +21,7 @@ sub finalize {
         return $c->NEXT::finalize;
     }
 
-    unless ( $c->response->content_type =~ /^text/ ) {
+    unless ( $c->response->content_type =~ /^text|xml$|javascript$/ ) {
         return $c->NEXT::finalize;
     }
 
