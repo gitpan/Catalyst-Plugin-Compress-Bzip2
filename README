@@ -7,6 +7,8 @@ SYNOPSIS
 DESCRIPTION
     Bzip2 compress response if client supports it.
 
+METHODS
+  finalize
 SEE ALSO
     Catalyst.
 

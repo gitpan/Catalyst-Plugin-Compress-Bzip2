@@ -1,34 +1,35 @@
 package Catalyst::Plugin::Compress::Bzip2;
-
+use warnings;
 use strict;
+use MRO::Compat;
 
 use Compress::Bzip2 2.0 ();
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub finalize {
     my $c = shift;
 
     if ( $c->response->content_encoding ) {
-        return $c->NEXT::finalize;
+        return $c->next::method(@_);
     }
 
     unless ( $c->response->body ) {
-        return $c->NEXT::finalize;
+        return $c->next::method(@_);
     }
 
     unless ( $c->response->status == 200 ) {
-        return $c->NEXT::finalize;
+        return $c->next::method(@_);
     }
 
     unless ( $c->response->content_type =~ /^text|xml$|javascript$/ ) {
-        return $c->NEXT::finalize;
+        return $c->next::method(@_);
     }
 
     my $accept = $c->request->header('Accept-Encoding') || '';
 
     unless ( index( $accept, "bzip2" ) >= 0 ) {
-        return $c->NEXT::finalize;
+        return $c->next::method(@_);
     }
 
     $c->response->body( Compress::Bzip2::memBzip( $c->response->body ) );
@@ -36,7 +37,7 @@ sub finalize {
     $c->response->content_encoding('bzip2');
     $c->response->headers->push_header( 'Vary', 'Accept-Encoding' );
 
-    $c->NEXT::finalize;
+    $c->next::method(@_);
 }
 
 1;
@@ -55,6 +56,10 @@ Catalyst::Plugin::Compress::Bzip2 - Bzip2 response
 =head1 DESCRIPTION
 
 Bzip2 compress response if client supports it.
+
+=head1 METHODS
+
+=head2 finalize
 
 =head1 SEE ALSO
 
