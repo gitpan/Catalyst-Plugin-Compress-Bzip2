@@ -5,7 +5,7 @@ use MRO::Compat;
 
 use Compress::Bzip2 2.0 ();
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub finalize {
     my $c = shift;
@@ -46,14 +46,18 @@ __END__
 
 =head1 NAME
 
-Catalyst::Plugin::Compress::Bzip2 - Bzip2 response
+Catalyst::Plugin::Compress::Bzip2 - DEPRECATED Bzip2 response
 
 =head1 SYNOPSIS
 
     use Catalyst qw[Compress::Bzip2];
-
+    # NOTE - DEPRECATED, supported for legacy applications,
+    #        but use Catalyst::Plugin::Compress in new code.
 
 =head1 DESCRIPTION
+
+B<DEPRECATED> - supported for legacy applications, but use
+L<Catalyst::Plugin::Compress> in new code.
 
 Bzip2 compress response if client supports it.
 
